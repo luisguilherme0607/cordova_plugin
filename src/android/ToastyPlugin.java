@@ -14,6 +14,7 @@ public class ToastyPlugin extends CordovaPlugin {
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
       // Verify that the user sent a 'show' action
+      private com.honeywell.aidc.BarcodeReader barcodeReader;
       if (!action.equals("show")) {
         callbackContext.error("\"" + action + "\" is not a recognized action.");
         return false;
