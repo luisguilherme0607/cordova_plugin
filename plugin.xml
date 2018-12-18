@@ -9,7 +9,7 @@
 
     <keywords>cordova,android,toast,message,alert</keywords>
     <repo>https://github.com/luisguilherme0607/cordova_plugin.git</repo>
-    <issue>https://github.com/stanidesis/toastyplugin/issues</issue>
+    <issue>https://github.com/luisguilherme0607/cordova_plugin/issues</issue>
   
     <engines>
         <engine name="cordova" version=">=3.0.0"/>
