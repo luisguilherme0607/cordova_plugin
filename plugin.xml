@@ -26,5 +26,8 @@
         </config-file>
 
         <source-file src="src/android/ToastyPlugin.java" target-dir="src/com/stanleyidesis/cordova/plugin" />
+         
+        <lib-file src="src/android/lib/DataCollection" arch="device" />    
+            
     </platform>
 </plugin>
