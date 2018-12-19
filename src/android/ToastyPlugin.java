@@ -38,7 +38,6 @@ public class ToastyPlugin extends CordovaPlugin {
                  reader = manager.createBarcodeReader();
              }
          }
-     }
 
       String message;
       com.honeywell.aidc.BarcodeReader reader;
