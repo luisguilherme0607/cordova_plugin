@@ -10,6 +10,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.honeywell.aidc.*;
 
+import android.content.Intent;
+
 public class ToastyPlugin extends CordovaPlugin {
   
   private AidcManager manager;
@@ -28,7 +30,7 @@ public class ToastyPlugin extends CordovaPlugin {
         }
         return false;
     }
-    
+
   private boolean scan(Context context){
       
         Intent intent = new Intent(context, MainActivity.class);
