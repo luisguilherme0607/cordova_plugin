@@ -56,25 +56,6 @@ public class ToastyPlugin extends CordovaPlugin {
              
           });
      }
-
-      String message;
-      
-      try {
-
-        JSONObject options = args.getJSONObject(0);
-        message = options.getString("message");
-      } catch (JSONException e) {
-        callbackContext.error("Error encountered: " + e.getMessage());
-        return false;
-      }
-     
-    Toast toast = Toast.makeText(cordova.getActivity(), message, 2);
-      toast.show();
-
-    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-    callbackContext.sendPluginResult(pluginResult);
-
-    return true;
   }
 }
 
