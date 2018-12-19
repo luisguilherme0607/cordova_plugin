@@ -12,7 +12,6 @@ import com.honeywell.aidc.*;
 
 public class ToastyPlugin extends CordovaPlugin {
   
-  private static final String DURATION_LONG = "long";
   private AidcManager manager;
   private BarcodeReader reader;
   private Object cor = this;
@@ -37,7 +36,6 @@ public class ToastyPlugin extends CordovaPlugin {
              public void onCreated(AidcManager aidcManager) {
                  manager = aidcManager;
                  reader = manager.createBarcodeReader();
-                 cor = this;
             
                   try {
                      // apply settings
@@ -48,12 +46,12 @@ public class ToastyPlugin extends CordovaPlugin {
                      reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
                          BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
                  } catch (UnsupportedPropertyException e) {
-                     Toast.makeText(cor.cordova.getActivity(), "Failed to apply properties",
+                     Toast.makeText(ToastyPlugin.this.cordova.getActivity(), "Failed to apply properties",
                          Toast.LENGTH_SHORT).show();
                  }
 
                  // register bar code event listener
-                 reader.addBarcodeListener(cor.cordova.getActivity());
+                 reader.addBarcodeListener(ToastyPlugin.this.cordova.getActivity());
 
             }
         });
