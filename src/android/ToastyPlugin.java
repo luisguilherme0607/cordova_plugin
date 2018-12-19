@@ -23,7 +23,6 @@ public class ToastyPlugin extends CordovaPlugin {
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
 
-      return false;
      Context context = cordova.getActivity().getApplicationContext();
         if(action.equals("scan")) {
             this.scan(context);
@@ -32,7 +31,7 @@ public class ToastyPlugin extends CordovaPlugin {
         return false;
     }
 
-  private boolean scan(Context context){
+  private void scan(Context context){
       
         Intent intent = new Intent(context, MainActivity.class);
         this.cordova.getActivity().startActivity(intent);
