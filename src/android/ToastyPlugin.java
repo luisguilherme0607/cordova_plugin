@@ -42,7 +42,8 @@ public class ToastyPlugin extends CordovaPlugin {
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
       String message;
-
+      com.honeywell.aidc.BarcodeReader barcodeReader;
+      
       try {
 
         JSONObject options = args.getJSONObject(0);
