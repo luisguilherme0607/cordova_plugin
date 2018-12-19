@@ -42,7 +42,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private void scan(JSONArray args, CallbackContext callbackContext){
     
-    PluginResult pluginResult = new PluginResult(PluginResult.Status.Ok);
+    PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
     callbackContext.sendPluginResult(pluginResult);
   }
 }
