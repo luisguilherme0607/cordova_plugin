@@ -15,6 +15,7 @@ public class ToastyPlugin extends CordovaPlugin {
   private static final String DURATION_LONG = "long";
   private AidcManager manager;
   private BarcodeReader reader;
+  private Object cor = this;
   
   @Override
   public boolean execute(String action, JSONArray args,
@@ -29,7 +30,6 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-     Object cor = this;
 
      AidcManager.create(cor.cordova.getActivity(), new AidcManager.CreatedCallback() {
 
