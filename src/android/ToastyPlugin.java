@@ -37,7 +37,7 @@ public class ToastyPlugin extends CordovaPlugin {
              public void onCreated(AidcManager aidcManager) {
                  manager = aidcManager;
                  reader = manager.createBarcodeReader();
-             
+            
                   try {
                      // apply settings
                      reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
@@ -53,9 +53,9 @@ public class ToastyPlugin extends CordovaPlugin {
 
                  // register bar code event listener
                  reader.addBarcodeListener(activity);
-             
-          });
-     }
-  }
+
+            }
+        });
+    }
 }
 
