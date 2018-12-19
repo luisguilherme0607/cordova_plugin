@@ -29,7 +29,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-     Object activity = this.cordova.getActivity();
+     Activity activity = this.cordova.getActivity();
 
      AidcManager.create(activity, new AidcManager.CreatedCallback() {
 
