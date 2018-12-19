@@ -41,6 +41,9 @@ public class ToastyPlugin extends CordovaPlugin {
   }
 
   private void scan(JSONArray args, CallbackContext callbackContext){
+
+      String message;
+
       try {
 
         JSONObject options = args.getJSONObject(0);
