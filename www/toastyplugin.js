@@ -11,6 +11,7 @@ ToastyPlugin.prototype.show = function(message, duration, successCallback, error
 }
 
 ToastyPlugin.prototype.scan = function(){
+  var options = {}
   cordova.exec(successCallback, errorCallback,'ToastyPlugin', 'scan', [options]);
 }
 

@@ -15,9 +15,6 @@ import android.content.Context;
 
 public class ToastyPlugin extends CordovaPlugin {
   
-  private AidcManager manager;
-  private BarcodeReader reader;
-  private Object cor = this;
   
   @Override
   public boolean execute(String action, JSONArray args,
