@@ -35,11 +35,41 @@ public class ToastyPlugin extends CordovaPlugin {
              public void onCreated(AidcManager aidcManager) {
                  manager = aidcManager;
                  reader = manager.createBarcodeReader();
+             
+                  try {
+                     // apply settings
+                     reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
+                     reader.setProperty(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+
+                     // set the trigger mode to automatic control
+                     reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+                         BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
+                 } catch (UnsupportedPropertyException e) {
+                     Toast.makeText(MainActivity.this, "Failed to apply properties",
+                         Toast.LENGTH_SHORT).show();
+                 }
+
+                 // register bar code event listener
+                 reader.addBarcodeListener(this.cordova.getActivity());
              }
+
+
+              @Override
+              public void onBarcodeEvent(final BarcodeReadEvent event) {
+                 runOnUiThread(new Runnable() {
+                 @Override
+                 public void run() {
+                   String barcodeData = event.getBarcodeData();
+                   String timestamp = event.getTimestamp();
+
+                 // update UI to reflect the data
+                  }
+              });
+     }
+
          });
 
       String message;
-      com.honeywell.aidc.BarcodeReader reader;
       
       try {
 
