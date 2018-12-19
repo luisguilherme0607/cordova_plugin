@@ -53,11 +53,9 @@ public class ToastyPlugin extends CordovaPlugin {
 
                  // register bar code event listener
                  reader.addBarcodeListener(activity);
-             }
+             
           });
      }
-
-         });
 
       String message;
       
