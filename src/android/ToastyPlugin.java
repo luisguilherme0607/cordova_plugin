@@ -29,9 +29,9 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-     Activity activity = this.cordova.getActivity();
+     Object cor = this;
 
-     AidcManager.create(activity, new AidcManager.CreatedCallback() {
+     AidcManager.create(cor.cordova.getActivity(), new AidcManager.CreatedCallback() {
 
               @Override
              public void onCreated(AidcManager aidcManager) {
@@ -47,12 +47,12 @@ public class ToastyPlugin extends CordovaPlugin {
                      reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
                          BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
                  } catch (UnsupportedPropertyException e) {
-                     Toast.makeText(activity, "Failed to apply properties",
+                     Toast.makeText(cor.cordova.getActivity(), "Failed to apply properties",
                          Toast.LENGTH_SHORT).show();
                  }
 
                  // register bar code event listener
-                 reader.addBarcodeListener(activity);
+                 reader.addBarcodeListener(cor.cordova.getActivity());
 
             }
         });
