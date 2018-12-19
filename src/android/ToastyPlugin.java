@@ -29,7 +29,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-     AidcManager.create(new Inner(), new AidcManager.CreatedCallback() {
+     AidcManager.create(this.cordova.getActivity(), new AidcManager.CreatedCallback() {
 
               @Override
              public void onCreated(AidcManager aidcManager) {
@@ -60,6 +60,3 @@ public class ToastyPlugin extends CordovaPlugin {
   }
 }
 
-class Inner extends Context {
-
-}
