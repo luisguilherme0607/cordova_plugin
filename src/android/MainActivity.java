@@ -18,15 +18,14 @@ import android.os.Bundle;
 
 public class MainActivity extends Activity {
 
+    private AidcManager manager;
+    private BarcodeReader reader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
         setContentView(getApplication().getResources().getIdentifier("MainActivity", "layout", package_name));
-    }   @Override
-     public void onCreate(Bundle savedInstanceState) {
-         super.onCreate(savedInstanceState);
-
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
