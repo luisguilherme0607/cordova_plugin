@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import com.honeywell.aidc.*;
-import MainActivity;
 
 public class ToastyPlugin extends CordovaPlugin {
   
@@ -30,7 +29,14 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-      MainActivity ac = new MainActivity();
+     AidcManager.create(new Inner(), new AidcManager.CreatedCallback() {
+
+              @Override
+             public void onCreated(AidcManager aidcManager) {
+                 manager = aidcManager;
+                 reader = manager.createBarcodeReader();
+             }
+         }
 
       String message;
       com.honeywell.aidc.BarcodeReader reader;
@@ -52,4 +58,8 @@ public class ToastyPlugin extends CordovaPlugin {
 
     return true;
   }
+}
+
+class Inner extends Context {
+
 }
