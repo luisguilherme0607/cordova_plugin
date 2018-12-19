@@ -16,12 +16,12 @@ import android.os.Bundle;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
     private AidcManager manager;
     private BarcodeReader reader;
 
-    @Override
+    @Override 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
