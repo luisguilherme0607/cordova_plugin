@@ -14,10 +14,10 @@ public class ToastyPlugin extends CordovaPlugin {
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
       // Verify that the user sent a 'show' action
-      private com.honeywell.aidc.BarcodeReader barcodeReader;
-      if (!action.equals("show")) {
-        callbackContext.error("\"" + action + "\" is not a recognized action.");
-        return false;
+      
+      if (action.equals("scan")) {
+        scan(args); 
+        return true;
       }
       String message;
       String duration;
@@ -38,5 +38,10 @@ public class ToastyPlugin extends CordovaPlugin {
       PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
       callbackContext.sendPluginResult(pluginResult);
       return true;
+  }
+
+  private void scan(JSONArray args){
+    args.add(0, "result"); 
+      
   }
 }
