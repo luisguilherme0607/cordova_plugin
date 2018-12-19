@@ -45,7 +45,7 @@ public class ToastyPlugin extends CordovaPlugin {
                      reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
                          BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
                  } catch (UnsupportedPropertyException e) {
-                     Toast.makeText(MainActivity.this, "Failed to apply properties",
+                     Toast.makeText(this.cordova.getActivity(), "Failed to apply properties",
                          Toast.LENGTH_SHORT).show();
                  }
 
