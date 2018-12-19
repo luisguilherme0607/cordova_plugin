@@ -37,6 +37,7 @@ public class ToastyPlugin extends CordovaPlugin {
              public void onCreated(AidcManager aidcManager) {
                  manager = aidcManager;
                  reader = manager.createBarcodeReader();
+                 cor = this;
             
                   try {
                      // apply settings
