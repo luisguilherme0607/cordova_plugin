@@ -30,8 +30,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
-       com.honeywall.aidc.AidcManager.create(this, new AidcManager.CreatedCallback() {
-
+      AidcManager.create(this, new AidcManager.CreatedCallback() {
               @Override
              public void onCreated(AidcManager aidcManager) {
                  manager = aidcManager;
