@@ -42,8 +42,8 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private void scan(JSONArray args, CallbackContext callbackContext){
     
-    BarcodeReader reader = null;;
-    PluginResult pluginResult = new PlgunResult(PluginResult.Status.Ok);
+    BarcodeReader reader;
+    PluginResult pluginResult = new PluginResult(PluginResult.Status.Ok);
     callbackContext.sendPluginResult(pluginResult);
   }
 }
