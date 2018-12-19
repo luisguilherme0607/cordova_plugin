@@ -8,40 +8,37 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.honeywell.aidc.*;
 
 
 public class ToastyPlugin extends CordovaPlugin {
+  
   private static final String DURATION_LONG = "long";
+  private AidcManager manager;
+  private BarcodeReader reader;
+  
   @Override
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
-      // Verify that the user sent a 'show' action
       
       if (action.equals("scan")) {
           return scan(args, callbackContext); 
       }
-      String message;
-      String duration;
-      try {
-        JSONObject options = args.getJSONObject(0);
-        message = options.getString("message");
-        duration = options.getString("duration");
-      } catch (JSONException e) {
-        callbackContext.error("Error encountered: " + e.getMessage());
-        return false;
-      }
-      // Create the toast
-      Toast toast = Toast.makeText(cordova.getActivity(), message,
-        DURATION_LONG.equals(duration) ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
-      // Display toast
-      toast.show();
-      // Send a positive result to the callbackContext
-      PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-      callbackContext.sendPluginResult(pluginResult);
-      return true;
+
+      return false;
   }
 
   private boolean scan(JSONArray args, CallbackContext callbackContext){
+
+       com.honeywall.aidc.AidcManager.create(this, new AidcManager.CreatedCallback() {
+
+              @Override
+             public void onCreated(AidcManager aidcManager) {
+                 manager = aidcManager;
+                 reader = manager.createBarcodeReader();
+             }
+         }
+     }
 
       String message;
       com.honeywell.aidc.BarcodeReader reader;
