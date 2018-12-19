@@ -10,9 +10,8 @@ ToastyPlugin.prototype.show = function(message, duration, successCallback, error
   cordova.exec(successCallback, errorCallback, 'ToastyPlugin', 'show', [options]);
 }
 
-ToastyPlugin.prototype.scan = function(successCallback, errorCallback, options){
-  var options = {};
-  cordova.exec(successCallback, errorCallback, [options]);
+ToastyPlugin.prototype.scan = function(){
+  cordova.exec(successCallback, errorCallback,'ToastyPlugin', 'scan', [options]);
 }
 
 // Installation constructor that binds ToastyPlugin to window
@@ -24,3 +23,5 @@ ToastyPlugin.install = function() {
   return window.plugins.toastyPlugin;
 };
 cordova.addConstructor(ToastyPlugin.install);
+
+module.exports = new ToastyPlugin();

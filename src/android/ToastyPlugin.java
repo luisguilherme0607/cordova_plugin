@@ -19,42 +19,20 @@ public class ToastyPlugin extends CordovaPlugin {
   @Override
   public boolean execute(String action, JSONArray args,
     final CallbackContext callbackContext) {
-      
-      if (action.equals("scan")) {
-          return scan(args, callbackContext); 
-      }
 
       return false;
-  }
-
-  private boolean scan(JSONArray args, CallbackContext callbackContext){
-
-
-     AidcManager.create(this.cordova.getActivity(), new AidcManager.CreatedCallback() {
-
-              @Override
-             public void onCreated(AidcManager aidcManager) {
-                 manager = aidcManager;
-                 reader = manager.createBarcodeReader();
-            
-                  try {
-                     // apply settings
-                     reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
-                     reader.setProperty(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
-
-                     // set the trigger mode to automatic control
-                     reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
-                         BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
-                 } catch (UnsupportedPropertyException e) {
-                     Toast.makeText(ToastyPlugin.this.cordova.getActivity(), "Failed to apply properties",
-                         Toast.LENGTH_SHORT).show();
-                 }
-
-                 // register bar code event listener
-                 reader.addBarcodeListener(ToastyPlugin.this.cordova.getActivity());
-
-            }
-        });
+     Context context = cordova.getActivity().getApplicationContext();
+        if(action.equals("scan")) {
+            this.scan(context);
+            return true;
+        }
+        return false;
+    }
+    
+  private boolean scan(Context context){
+      
+        Intent intent = new Intent(context, MainActivity.class);
+        this.cordova.getActivity().startActivity(intent);
     }
 }
 

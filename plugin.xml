@@ -25,7 +25,15 @@
             </feature>
         </config-file>
 
+         <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:label="Main Activity" android:name="com.stanleyidesis.cordova.plugin.MainActivity"></activity>
+        </config-file>
+
+        <config-file parent="/*" target="AndroidManifest.xml"></config-file>
+
         <source-file src="src/android/ToastyPlugin.java" target-dir="src/com/stanleyidesis/cordova/plugin" />
+        <source-file src="src/android/MainActivity.java" target-dir="src/com/stanleyidesis/cordova/plugin" />
+        <source-file src="src/android/MainActivity.xml" target-dir="res/layout"/>
             
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
         <resource-file src="src/android/DataCollection.aar" target="libs/DataCollection.aar" />
