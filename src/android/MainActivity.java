@@ -13,7 +13,8 @@ import com.honeywell.aidc.*;
 
 import android.app.Activity;
 import android.os.Bundle;
-
+import android.content.Context;
+import android.content.Intent;
 
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
