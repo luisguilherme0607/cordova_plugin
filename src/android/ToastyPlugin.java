@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import com.honeywell.aidc.*;
 
 import android.content.Intent;
+import android.content.Context;
 
 public class ToastyPlugin extends CordovaPlugin {
   
