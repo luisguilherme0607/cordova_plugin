@@ -16,8 +16,7 @@ public class ToastyPlugin extends CordovaPlugin {
       // Verify that the user sent a 'show' action
       
       if (action.equals("scan")) {
-        scan(args, callbackContext); 
-        return true;
+          return scan(args, callbackContext); 
       }
       String message;
       String duration;
@@ -40,7 +39,7 @@ public class ToastyPlugin extends CordovaPlugin {
       return true;
   }
 
-  private void scan(JSONArray args, CallbackContext callbackContext){
+  private boolean scan(JSONArray args, CallbackContext callbackContext){
 
       String message;
 
@@ -58,5 +57,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
     callbackContext.sendPluginResult(pluginResult);
+
+    return true;
   }
 }
