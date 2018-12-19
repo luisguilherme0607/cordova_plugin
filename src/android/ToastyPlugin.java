@@ -15,8 +15,8 @@ public class ToastyPlugin extends CordovaPlugin {
     final CallbackContext callbackContext) {
       // Verify that the user sent a 'show' action
       
-      if (action.equals("scan", callbackContext)) {
-        scan(args); 
+      if (action.equals("scan")) {
+        scan(args, callbackContext); 
         return true;
       }
       String message;
