@@ -8,6 +8,8 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 public class ToastyPlugin extends CordovaPlugin {
   private static final String DURATION_LONG = "long";
   @Override
@@ -42,7 +44,7 @@ public class ToastyPlugin extends CordovaPlugin {
   private boolean scan(JSONArray args, CallbackContext callbackContext){
 
       String message;
-      com.honeywell.aidc.BarcodeReader barcodeReader;
+      BarcodeReader reader;
       
       try {
 
