@@ -50,8 +50,7 @@ public class ToastyPlugin extends CordovaPlugin {
         return false;
       }
      
-    Toast toast = Toast.makeText(cordova.getActivity(), message,
-        DURATION_LONG.equals(duration) ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+    Toast toast = Toast.makeText(cordova.getActivity(), message, 2);
       toast.show();
 
     PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
