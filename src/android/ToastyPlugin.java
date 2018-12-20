@@ -34,8 +34,8 @@ public class ToastyPlugin extends CordovaPlugin {
      //   this.cordova.getActivity().startActivity(intent);
         this.cordova.setActivityResultCallback(this);
         intent.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
-        this.cordova.startActivityForResult(this, intent, "");
-    }
+        this.cordova.startActivityForResult(this, intent, 0);
+    
     
 
     @Override
