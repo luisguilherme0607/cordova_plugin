@@ -20,6 +20,9 @@ import android.hardware.Camera.CameraInfo;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.map;
+import java.util.hashmap;
+
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
      private AidcManager manager;
@@ -84,7 +87,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                   // Enable bad read response
                   properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
                   // Apply the settings
-                  barcodeReader.setProperties(properties);
+                  reader.setProperties(properties);
 
                  // register bar code event listener
                  reader.addBarcodeListener(MainActivity.this);
