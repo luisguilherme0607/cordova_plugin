@@ -30,7 +30,7 @@ public class ToastyPlugin extends CordovaPlugin {
 
   private void scan(Context context){
       
-        Intent intent = new Intent(this.cordova.getActivity.getBaseContext(), MainActivity.class);
+        Intent intent = new Intent(this.cordova.getActivity().getBaseContext(), MainActivity.class);
      //   this.cordova.getActivity().startActivity(intent);
         this.cordova.setActivityResultCallback(this);
         intent.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
