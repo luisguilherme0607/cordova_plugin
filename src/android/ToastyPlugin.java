@@ -22,13 +22,13 @@ public class ToastyPlugin extends CordovaPlugin {
 
      Context context = cordova.getActivity().getApplicationContext();
         if(action.equals("scan")) {
-            this.scan(context);
+            this.scan(context, callbackContext);
             return true;
         }
         return false;
     }
 
-  private void scan(Context context){
+  private void scan(Context context, CallbackContext callbackContext){
 
         Toast toast = Toast.makeText(cordova.getActivity(), "here", Toast.LENGTH_SHORT);
         // Display toast
