@@ -18,6 +18,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
