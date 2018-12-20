@@ -19,6 +19,7 @@ import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
