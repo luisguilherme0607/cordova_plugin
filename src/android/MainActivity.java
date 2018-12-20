@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
-       // setContentView(getApplication().getResources().getIdentifier("MainActivity", "layout", package_name));
+        setContentView(getApplication().getResources().getIdentifier("MainActivity", "layout", package_name));
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
@@ -46,6 +46,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
 
                      // set the trigger mode to automatic control
                      reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+                     
                          BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
                  } catch (UnsupportedPropertyException e) {
                      Toast.makeText(MainActivity.this, "Failed to apply properties",
