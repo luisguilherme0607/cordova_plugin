@@ -19,6 +19,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -50,7 +51,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
         Button btn = new Button(this);
         btn.setText("Button");
         btn.setOnClickListener(mThisButtonListener);
-        btn.addView(btn, p);
+        layout.addView(btn, p);
          // Create the text view
         TextView textView = new TextView(this);
         textView.setTextSize(40);
