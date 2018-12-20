@@ -94,10 +94,10 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                  // register bar code event listener
                  reader.addBarcodeListener(MainActivity.this);
 
-                 reader.light(true);
-
+                 
                  try{
-
+                     
+                     reader.light(true);
                      reader.claim();
                  }catch(ScannerUnavailableException e){
                      e.printStackTrace();
