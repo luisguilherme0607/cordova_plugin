@@ -20,11 +20,14 @@ import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
@@ -37,13 +40,24 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
         String package_name = getApplication().getPackageName();
 //        setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
 
+        LinearLayout layout = new LinearLayout(this);
+
+        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.FILL_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        Button btn = new Button(this);
+        btn.setText("Button");
+        btn.setOnClickListener(mThisButtonListener);
+        btn.addView(btn, p);
          // Create the text view
         TextView textView = new TextView(this);
         textView.setTextSize(40);
         textView.setText("This is the text view");
 
         // Set the text view as the activity layout
-        setContentView(textView);
+        setContentView(layout);
 
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
@@ -202,4 +216,11 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
              }
          });
      }
+
+     private OnClickListener mThisButtonListener = new OnClickListener() {
+        public void onClick(View v) {
+            Toast.makeText(MainActivity.this, "Hello !",
+                    Toast.LENGTH_LONG).show();
+        }
+    };
  }
