@@ -46,13 +46,11 @@ public class ToastyPlugin extends CordovaPlugin {
   }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
        super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
             String barcode = data.getStringExtra("barcodeData");
             String timestamp = data.getStringExtra("timestamp");
-        } 
     }
 
 }
