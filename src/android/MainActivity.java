@@ -17,6 +17,9 @@ import android.os.Bundle;
 
 
 public class MainActivity extends Activity {
+    
+     private AidcManager manager;
+     private BarcodeReader reader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
