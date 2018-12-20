@@ -19,7 +19,6 @@
           android:background="#5C8A8A"
           android:gravity="left"
           android:padding="6dp"
-          android:text="@string/txtBarcodeTitle"
           android:textColor="#FFFFFF"
           android:textSize="13sp" >
         </TextView>
