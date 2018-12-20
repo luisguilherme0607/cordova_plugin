@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
+import android.view.View;
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
