@@ -16,7 +16,7 @@
          android:background="#5C8A8A"
          android:gravity="left"
          android:padding="6dp"
-         android:text="@string/txtMainTitle"
+         android:text="maintitle"
          android:textColor="#FFFFFF"
          android:textSize="13sp" >
 
@@ -35,21 +35,21 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="22dp"
-              android:text="@string/btnAutomaticBarcode" />
+              android:text="automaticbarcode" />
 
           <Button
               android:id="@+id/buttonClientBarcode"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="22dp"
-              android:text="@string/btnClientBarcode" />
+              android:text="clientbarcode" />
 
           <Button
               android:id="@+id/buttonScannerSelectBarcode"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:layout_marginTop="22dp"
-              android:text="@string/btnScannerSelectBarcode" />
+              android:text="selectbarcode" />
 
       </LinearLayout>
 
