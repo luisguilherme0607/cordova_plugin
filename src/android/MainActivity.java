@@ -18,12 +18,10 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 import android.R;
-import android.R.id;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,11 +39,11 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
+        View view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
 
-
-        setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
-        
-         this.turn_on = (Button)this.findViewById(getApplication().getResources().getIdentifier("on", "layout", package_name));
+        setContentView(view);
+        /*
+         this.turn_on = (Button)this.findViewById(R.id.on);
          this.turn_on.setOnClickListener(new OnClickListener() {
               @Override
               public void onClick(View v) {
@@ -65,7 +63,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
          }
         });
 
-        this.turn_off = (Button)this.findViewById(getApplication().getResources().getIdentifier("off", "layout", package_name));
+        this.turn_off = (Button)this.findViewById(R.id.off);
         this.turn_off.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -84,7 +82,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 } 
             }
         });
-
+*/
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
