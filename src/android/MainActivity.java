@@ -39,26 +39,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
-//        setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
-
-        LinearLayout layout = new LinearLayout(this);
-
-        LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.FILL_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-        );
-
-        Button btn = new Button(this);
-        btn.setText("Button");
-        btn.setOnClickListener(mThisButtonListener);
-        layout.addView(btn, p);
-         // Create the text view
-        TextView textView = new TextView(this);
-        textView.setTextSize(40);
-        textView.setText("This is the text view");
-
-        // Set the text view as the activity layout
-        setContentView(layout);
+        setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
 
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
