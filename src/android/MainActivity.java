@@ -13,20 +13,16 @@ import com.honeywell.aidc.*;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.content.Context;
-import android.content.Intent;
 
 
-public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
-    private AidcManager manager;
-    private BarcodeReader reader;
+public class MainActivity extends Activity {
 
-    @Override 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
-        setContentView(getApplication().getResources().getIdentifier("MainActivity", "layout", package_name));
+        //setContentView(getApplication().getResources().getIdentifier("MainActivity", "layout", package_name));
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {

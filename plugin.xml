@@ -28,6 +28,9 @@
          <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <activity android:label="Main Activity" android:name="com.stanleyidesis.cordova.plugin.MainActivity"></activity>
         </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="com.honeywell.decode.permission.DECODE" />
+        </config-file>
 
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
 
@@ -37,7 +40,6 @@
             
         <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
         <resource-file src="src/android/DataCollection.aar" target="libs/DataCollection.aar" />
-
 
     </platform>
 </plugin>
