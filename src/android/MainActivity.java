@@ -13,22 +13,17 @@ import com.honeywell.aidc.*;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.content.Intent;
 
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Button;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
@@ -39,7 +34,15 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
-       // setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
+//        setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
+
+         // Create the text view
+        TextView textView = new TextView(this);
+        textView.setTextSize(40);
+        textView.setText("This is the text view");
+
+        // Set the text view as the activity layout
+        setContentView(textView);
 
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
@@ -171,19 +174,18 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
          runOnUiThread(new Runnable() {
               @Override
              public void run() {
-                String barcodeData = event.getBarcodeData();
-                String timestamp = event.getTimestamp();
+                 String barcodeData = event.getBarcodeData();
+                 String timestamp = event.getTimestamp();
                 
-                Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
+                 Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
                  // update UI to reflect the data
 
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("barcodeData", barcodeData);
-                resultIntent.putExtra("timestamp", timestamp); 
+                 Intent resultIntent = new Intent();
+                // TODO Add extras or a data URI to this intent as appropriate.
+                resultIntent.putExtra("barcodeData", barcodeData); 
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
-
              }
          });
      }
@@ -198,11 +200,4 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
              }
          });
      }
-
-     private OnClickListener mThisButtonListener = new OnClickListener() {
-        public void onClick(View v) {
-            Toast.makeText(MainActivity.this, "Hello !",
-                    Toast.LENGTH_LONG).show();
-        }
-    };
  }
