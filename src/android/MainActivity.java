@@ -20,8 +20,10 @@ import android.hardware.Camera.CameraInfo;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.map;
-import java.util.hashmap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
 
