@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 import android.R;
+import android.R.id;
 
 import java.util.ArrayList;
 import java.util.HashMap;
