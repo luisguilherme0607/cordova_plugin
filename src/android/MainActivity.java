@@ -45,7 +45,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
 
         setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
         
-         this.turn_on = (Button)this.findViewById(R.id.on);
+         this.turn_on = (Button)this.findViewById(getApplication().getResources().getIdentifier("on", "layout", package_name));
          this.turn_on.setOnClickListener(new OnClickListener() {
               @Override
               public void onClick(View v) {
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
          }
         });
 
-        this.turn_off = (Button)this.findViewById(R.id.off);
+        this.turn_off = (Button)this.findViewById(getApplication().getResources().getIdentifier("off", "layout", package_name));
         this.turn_off.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
