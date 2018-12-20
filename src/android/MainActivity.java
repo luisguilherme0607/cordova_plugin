@@ -42,7 +42,6 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
         int view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
 
         setContentView(view);
-        /*
          this.turn_on = (Button)this.findViewById(R.id.on);
          this.turn_on.setOnClickListener(new OnClickListener() {
               @Override
@@ -80,9 +79,8 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                     e.printStackTrace();
                     Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
                 } 
-            }
+           }
         });
-*/
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
