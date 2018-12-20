@@ -101,7 +101,8 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                      reader.claim();
                  }catch(ScannerUnavailableException e){
                      e.printStackTrace();
-                     Toast.makeText(this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+
                  }
              }
          });
