@@ -16,8 +16,8 @@ import android.os.Bundle;
 
 
 
-public class MainActivity extends Activity {
-    
+public class MainActivity extends Activity implements BarcodeReader.BarcodeListener {
+
      private AidcManager manager;
      private BarcodeReader reader;
 
