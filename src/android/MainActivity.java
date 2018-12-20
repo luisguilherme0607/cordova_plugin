@@ -18,6 +18,7 @@ import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -30,14 +31,56 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
 
      private AidcManager manager;
      private BarcodeReader reader;
+     private Button turn_on;
+     private Button turn_off;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
+
+
         setContentView(getApplication().getResources().getIdentifier("mainactivity", "layout", package_name));
+        
+         this.turn_on = (Button)this.findViewById(R.id.on);
+         this.turn_on.setOnClickListener(new OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                    try{
+                    
+                    reader.light(true);
+                    reader.aim(true);
+                    reader.decode(true);
 
+                }catch(ScannerNotClaimedException e){
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
+                }catch(ScannerUnavailableException e){
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+                }       
+         }
+        });
 
+        this.turn_off = (Button)this.findViewById(R.id.off);
+        this.turn_off.setOnClickListener(new OnClickListener(){
+            @Override
+            public void onClick(View v){
+                   try{
+                    
+                    reader.light(false);
+                    reader.aim(false);
+                    reader.decode(false);
+
+                }catch(ScannerNotClaimedException e){
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
+                }catch(ScannerUnavailableException e){
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+                } 
+            }
+        });
 
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
@@ -102,7 +145,6 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                     reader.light(true);
                     reader.aim(true);
                     reader.decode(true);
-                    reader.captureImage();
 
                 }catch(ScannerNotClaimedException e){
                     e.printStackTrace();
