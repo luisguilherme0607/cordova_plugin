@@ -94,7 +94,15 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                  // register bar code event listener
                  reader.addBarcodeListener(MainActivity.this);
 
-                 reader.claim();
+                 reader.light(true);
+
+                 try{
+
+                     reader.claim();
+                 }catch(ScannerUnavailableException e){
+                     e.printStackTrace();
+                     Toast.makeText(this, "Scanner unavailable", Toast.LENGHT_SHORT).show();
+                 }
              }
          });
      }
