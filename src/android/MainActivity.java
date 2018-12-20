@@ -13,6 +13,7 @@ import com.honeywell.aidc.*;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.content.Intent;
 
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -174,12 +175,19 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
          runOnUiThread(new Runnable() {
               @Override
              public void run() {
-                 String barcodeData = event.getBarcodeData();
-                 String timestamp = event.getTimestamp();
+                String barcodeData = event.getBarcodeData();
+                String timestamp = event.getTimestamp();
                 
-                 Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
+                Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
                  // update UI to reflect the data
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("barcodeData", barcodeData);
+                resultIntent.putExtra("timestamp", timestamp); 
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+
              }
          });
      }
