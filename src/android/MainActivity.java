@@ -105,6 +105,9 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 try{
                     
                     reader.light(true);
+                    reader.aim(true);
+                    reader.decode(true);
+                    reader.captureImage();
 
                 }catch(ScannerNotClaimedException e){
                     e.printStackTrace();
