@@ -29,6 +29,13 @@ public class ToastyPlugin extends CordovaPlugin {
     }
 
   private void scan(Context context){
+
+        Toast toast = Toast.makeText(cordova.getActivity(), "here", Toast.LENGTH_SHORT);
+        // Display toast
+        toast.show();
+        // Send a positive result to the callbackContext
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+        callbackContext.sendPluginResult(pluginResult);
       
         Intent intent = new Intent(this.cordova.getActivity().getBaseContext(), MainActivity.class);
      //   this.cordova.getActivity().startActivity(intent);
