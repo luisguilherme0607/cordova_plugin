@@ -105,9 +105,9 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 try{
                     
                     reader.light(true);
-                    
+
                 }catch(ScannerNotClaimedException e){
-                    e.printStatTrace();
+                    e.printStackTrace();
                     Toast.makeText(MainActivity.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
                 }       
              }
