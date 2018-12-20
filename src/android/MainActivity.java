@@ -39,7 +39,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
-        View view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
+        int view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
 
         setContentView(view);
         /*
