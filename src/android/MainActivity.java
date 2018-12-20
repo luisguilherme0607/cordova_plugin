@@ -64,8 +64,32 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                          Toast.LENGTH_SHORT).show();
                  }
 
+                  Map<String, Object> properties = new HashMap<String, Object>();
+                  // Set Symbologies On/Off
+                  properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+                  properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+                  properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+                  properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+                  properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+                  properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+                  properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+                  properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+                  properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+                  properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+                  properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+                  // Set Max Code 39 barcode length
+                  properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+                  // Turn on center decoding
+                  properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+                  // Enable bad read response
+                  properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
+                  // Apply the settings
+                  barcodeReader.setProperties(properties);
+
                  // register bar code event listener
                  reader.addBarcodeListener(MainActivity.this);
+
+                 reader.claim();
              }
          });
      }
@@ -118,7 +142,9 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
              public void run() {
                  String barcodeData = event.getBarcodeData();
                  String timestamp = event.getTimestamp();
-
+                
+                 Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
+                     Toast.LENGTH_SHORT).show();
                  // update UI to reflect the data
              }
          });
