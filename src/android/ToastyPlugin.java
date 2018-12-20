@@ -36,7 +36,7 @@ public class ToastyPlugin extends CordovaPlugin {
         intent.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
         this.cordova.startActivityForResult(this, intent, 0);
     
-    
+  }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
