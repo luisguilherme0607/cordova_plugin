@@ -1,4 +1,4 @@
-package com.stanleyidesis.cordova.plugin;
+package com.bool.cordova.plugin;
 // The native Toast API
 import android.widget.Toast;
 // Cordova-required packages
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import android.content.Context;
 
-public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.BarcodeListener {
+public class Honeywell extends CordovaPlugin implements BarcodeReader.BarcodeListener {
   
    private AidcManager manager;
    private BarcodeReader reader;
@@ -99,7 +99,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             }
         try{
             
-            reader.light(ToastyPlugin.this.light);
+            reader.light(Honeywell.this.light);
             reader.aim(true);
             reader.decode(true);
 
