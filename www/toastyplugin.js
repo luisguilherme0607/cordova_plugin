@@ -15,6 +15,11 @@ ToastyPlugin.prototype.scan = function(result, successCallback, errorCallback){
   cordova.exec(successCallback, errorCallback,'ToastyPlugin', 'scan', [options]);
 }
 
+ToastyPlugin.prototype.stopScan = function(result, successCallback, errorCallback){
+  var options = {result};
+  cordova.exec(successCallback, errorCallback, 'ToastyPlugn', 'stopScan', [options]);
+}
+
 // Installation constructor that binds ToastyPlugin to window
 ToastyPlugin.install = function() {
   if (!window.plugins) {
