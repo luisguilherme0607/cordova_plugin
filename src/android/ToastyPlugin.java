@@ -30,7 +30,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
      Context context = cordova.getActivity().getApplicationContext();
         if(action.equals("scan")) {
-            this.scan(context, callbackContext);
+            this.scan(context, callbackContext, args);
             return true;
         } 
         if(action.equals("stopScan")){
@@ -40,7 +40,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
         return false;
     }
 
-  private void scan(Context context, CallbackContext callbackContext){
+  private void scan(Context context, CallbackContext callbackContext, JSONArray args){
 
         this.callbackContext = callbackContext;
         String light_option = "";
@@ -51,7 +51,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
         } catch (JSONException e) {
             callbackContext.error("Error encountered: " + e.getMessage());
-          return false;
         }
 
         this.light = light_option.equals("true") ? true : false;
@@ -103,7 +102,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             }
         try{
             
-            reader.light(this.light);
+            reader.light(ToastyPlugin.this.light);
             reader.aim(true);
             reader.decode(true);
 
@@ -132,8 +131,8 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
                  try {
 
                      JSONObject data = new JSONObject();
-                     parameter.put("barcode", barcodeData);
-                     parameter.put("timestamp", timestamp);
+                     data.put("barcode", barcodeData);
+                     data.put("timestamp", timestamp);
 
                      PluginResult result = new PluginResult(PluginResult.Status.OK, data);
                      result.setKeepCallback(true);
