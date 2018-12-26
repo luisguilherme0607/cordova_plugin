@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-honewell" version="0.0.1">
+        id="cordova-plugin-honeywell" version="0.0.1">
     <name>ToastyPlugin</name>
 
     <description>An Android Cordova plugin to scan bar codes.</description>
