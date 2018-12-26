@@ -104,7 +104,10 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
              
              reader.claim();
             }catch(ScannerUnavailableException e){
+               Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
+                     Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
+
             }
         try{
             
@@ -113,8 +116,12 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             reader.decode(true);
 
         }catch(ScannerNotClaimedException e){
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
+                     Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }catch(ScannerUnavailableException e){
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
+                     Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }       
      }
