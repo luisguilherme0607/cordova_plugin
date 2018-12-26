@@ -32,7 +32,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             this.scan(context, callbackContext);
             return true;
         }else if(action.equals("stopScan")){
-            stopScanning();
+            this.stopScanning(context , callbackContext);
             return true;
         }
 
@@ -160,7 +160,9 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
      }
 
 
-     public void stopScanning(){
+     public void stopScanning(Context context, CallbackContext callbackContext){
+
+       Toast toast = Toast.makeText(cordova.getActivity(), "Stopping scanner", Toast.LENGTH_SHORT).show();
 
           try{
             
@@ -190,6 +192,9 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
              // once closed, the object can no longer be used.
              manager.close();
          }
+
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+        callbackContext.sendPluginResult(pluginResult);
      }
 }
 
