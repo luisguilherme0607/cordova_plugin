@@ -33,6 +33,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             return true;
         }else if(action.equals("stopScan")){
             stopScanning();
+            return true;
         }
 
         return false;
@@ -160,6 +161,22 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
 
      public void stopScanning(){
+
+          try{
+            
+            reader.light(false);
+            reader.aim(false);
+            reader.decode(false);
+
+        }catch(ScannerNotClaimedException e){
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
+                     Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }catch(ScannerUnavailableException e){
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
+                     Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }       
          if (reader != null) {
              // unregister barcode event listener
              reader.removeBarcodeListener(this);
