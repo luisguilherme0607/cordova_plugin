@@ -47,15 +47,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
         callbackContext.sendPluginResult(pluginResult);
       
-        /*
-        Intent intent = new Intent(this.cordova.getActivity().getBaseContext(), MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-     //   this.cordova.getActivity().startActivity(intent);
-        this.cordova.setActivityResultCallback(this);
-        intent.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
-        this.cordova.startActivityForResult(this, intent, 0);
-    */
-    AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
+       AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
 
       @Override
      public void onCreated(AidcManager aidcManager) {
@@ -154,7 +146,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
              }
          });
      }
-
 
        @Override
      public void onFailureEvent(final BarcodeFailureEvent event) {
