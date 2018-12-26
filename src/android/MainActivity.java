@@ -38,50 +38,11 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         String package_name = getApplication().getPackageName();
         int view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
-/*
         setContentView(view);
-         this.turn_on = (Button)this.findViewById(R.id.on);
-         this.turn_on.setOnClickListener(new OnClickListener() {
-              @Override
-              public void onClick(View v) {
-                    try{
-                    
-                    reader.light(true);
-                    reader.aim(true);
-                    reader.decode(true);
 
-                }catch(ScannerNotClaimedException e){
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
-                }catch(ScannerUnavailableException e){
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
-                }       
-         }
-        });
-
-        this.turn_off = (Button)this.findViewById(R.id.off);
-        this.turn_off.setOnClickListener(new OnClickListener(){
-            @Override
-            public void onClick(View v){
-                   try{
-                    
-                    reader.light(false);
-                    reader.aim(false);
-                    reader.decode(false);
-
-                }catch(ScannerNotClaimedException e){
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
-                }catch(ScannerUnavailableException e){
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
-                } 
-           }
-        });
-        */
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
@@ -155,6 +116,8 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 }       
              }
          });
+
+         moveTaskToBack(true);
      }
 
       @Override
