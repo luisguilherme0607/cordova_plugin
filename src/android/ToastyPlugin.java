@@ -148,7 +148,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
        @Override
      public void onFailureEvent(final BarcodeFailureEvent event) {
-         runOnUiThread(new Runnable() {
+         cordova.getActivity().runOnUiThread(new Runnable() {
               @Override
              public void run() {
                  Toast.makeText(cordova.getActivity(), "Barcode read failed",
