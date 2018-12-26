@@ -162,7 +162,8 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
      public void stopScanning(Context context, CallbackContext callbackContext){
 
-       Toast toast = Toast.makeText(cordova.getActivity(), "Stopping scanner", Toast.LENGTH_SHORT).show();
+       Toast toast = Toast.makeText(cordova.getActivity(), "Stopping scanner", Toast.LENGTH_SHORT);
+       toast.show();
 
           try{
             
