@@ -43,17 +43,14 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
   private void scan(Context context, CallbackContext callbackContext, JSONArray args){
 
         this.callbackContext = callbackContext;
-        String light_option = "";
 
         try {
           JSONObject options = args.getJSONObject(0);
-          light_option = options.getString("message");
+          this.light = options.getBoolean("light");
 
         } catch (JSONException e) {
             callbackContext.error("Error encountered: " + e.getMessage());
         }
-
-        this.light = light_option.equals("true") ? true : false;
       
         AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
 
@@ -124,9 +121,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
               public void run() {
                  String barcodeData = event.getBarcodeData();
                  String timestamp = event.getTimestamp();
-                
-                 Toast.makeText(cordova.getActivity(), barcodeData + " " + timestamp,
-                     Toast.LENGTH_SHORT).show();
 
                  try {
 
