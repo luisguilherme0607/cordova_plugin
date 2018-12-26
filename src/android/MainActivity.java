@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
         super.onCreate(savedInstanceState);
         String package_name = getApplication().getPackageName();
         int view = getApplication().getResources().getIdentifier("mainactivity", "layout", package_name); 
-
+/*
         setContentView(view);
          this.turn_on = (Button)this.findViewById(R.id.on);
          this.turn_on.setOnClickListener(new OnClickListener() {
@@ -81,6 +81,7 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 } 
            }
         });
+        */
          // create the AidcManager providing a Context and an
          // CreatedCallback implementation.
          AidcManager.create(this, new AidcManager.CreatedCallback() {
