@@ -134,7 +134,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
                  String barcodeData = event.getBarcodeData();
                  String timestamp = event.getTimestamp();
                 
-                 Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
+                 Toast.makeText(cordova.getActivity().this, barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
                  // update UI to reflect the data
 
@@ -145,5 +145,16 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
          });
      }
 
+
+       @Override
+     public void onFailureEvent(final BarcodeFailureEvent event) {
+         runOnUiThread(new Runnable() {
+              @Override
+             public void run() {
+                 Toast.makeText(cordova.getActivity(), "Barcode read failed",
+                     Toast.LENGTH_SHORT).show();
+             }
+         });
+     }
 }
 
