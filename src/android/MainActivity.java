@@ -116,8 +116,6 @@ public class MainActivity extends Activity implements BarcodeReader.BarcodeListe
                 }       
              }
          });
-
-         moveTaskToBack(true);
      }
 
       @Override

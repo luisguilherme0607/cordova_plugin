@@ -13,7 +13,7 @@ import com.honeywell.aidc.*;
 import android.content.Intent;
 import android.content.Context;
 
-public class ToastyPlugin extends CordovaPlugin {
+public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.BarcodeListener {
   
   
   @Override
@@ -37,19 +37,112 @@ public class ToastyPlugin extends CordovaPlugin {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
         callbackContext.sendPluginResult(pluginResult);
       
+        /*
         Intent intent = new Intent(this.cordova.getActivity().getBaseContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
      //   this.cordova.getActivity().startActivity(intent);
         this.cordova.setActivityResultCallback(this);
         intent.setPackage(this.cordova.getActivity().getApplicationContext().getPackageName());
         this.cordova.startActivityForResult(this, intent, 0);
-    
+    */
+    AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
+
+      @Override
+     public void onCreated(AidcManager aidcManager) {
+         manager = aidcManager;
+         // use the manager to create a BarcodeReader with a session
+         // associated with the internal imager.
+         reader = manager.createBarcodeReader();
+
+         try {
+             // apply settings
+             reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
+             reader.setProperty(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+
+             // set the trigger mode to automatic control
+             reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
+             
+                 BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
+         } catch (UnsupportedPropertyException e) {
+             Toast.makeText(ToastyPlugin.this, "Failed to apply properties",
+                 Toast.LENGTH_SHORT).show();
+         }
+
+          Map<String, Object> properties = new HashMap<String, Object>();
+          // Set Symbologies On/Off
+          properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
+          properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
+          properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
+          properties.put(BarcodeReader.PROPERTY_CODE_39_ENABLED, true);
+          properties.put(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+          properties.put(BarcodeReader.PROPERTY_UPC_A_ENABLE, true);
+          properties.put(BarcodeReader.PROPERTY_EAN_13_ENABLED, false);
+          properties.put(BarcodeReader.PROPERTY_AZTEC_ENABLED, false);
+          properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
+          properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
+          properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
+          // Set Max Code 39 barcode length
+          properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
+          // Turn on center decoding
+          properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
+          // Enable bad read response
+          properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
+          // Apply the settings
+          reader.setProperties(properties);
+
+         // register bar code event listener
+         reader.addBarcodeListener(ToastyPlugin.this);
+
+         
+         try{
+             
+             reader.claim();
+            }catch(ScannerUnavailableException e){
+                e.printStackTrace();
+                Toast.makeText(ToastyPlugin.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+            }
+        try{
+            
+            reader.light(true);
+            reader.aim(true);
+            reader.decode(true);
+
+        }catch(ScannerNotClaimedException e){
+            e.printStackTrace();
+            Toast.makeText(ToastyPlugin.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
+        }catch(ScannerUnavailableException e){
+            e.printStackTrace();
+            Toast.makeText(ToastyPlugin.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
+        }       
+     }
+ });
   }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
+
+       @Override
+     public void onBarcodeEvent(final BarcodeReadEvent event) {
+         runOnUiThread(new Runnable() {
+              @Override
+             public void run() {
+                 String barcodeData = event.getBarcodeData();
+                 String timestamp = event.getTimestamp();
+                
+                 Toast.makeText(MainActivity.this, barcodeData + " " + timestamp,
+                     Toast.LENGTH_SHORT).show();
+                 // update UI to reflect the data
+
+                 Intent resultIntent = new Intent();
+                // TODO Add extras or a data URI to this intent as appropriate.
+                resultIntent.putExtra("barcodeData", barcodeData); 
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+             }
+         });
+     }
 
 }
 
