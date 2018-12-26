@@ -10,11 +10,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import com.honeywell.aidc.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 import android.content.Context;
 
 public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.BarcodeListener {
   
+   private AidcManager manager;
+   private BarcodeReader reader;
   
   @Override
   public boolean execute(String action, JSONArray args,
@@ -63,9 +70,8 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
              reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
              
                  BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
-         } catch (UnsupportedPropertyException e) {
-             Toast.makeText(ToastyPlugin.this, "Failed to apply properties",
-                 Toast.LENGTH_SHORT).show();
+     } catch (UnsupportedPropertyException e) {
+           e.printStackTrace();
          }
 
           Map<String, Object> properties = new HashMap<String, Object>();
@@ -99,7 +105,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
              reader.claim();
             }catch(ScannerUnavailableException e){
                 e.printStackTrace();
-                Toast.makeText(ToastyPlugin.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
             }
         try{
             
@@ -109,10 +114,8 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
         }catch(ScannerNotClaimedException e){
             e.printStackTrace();
-            Toast.makeText(ToastyPlugin.this, "Scanner not claimed", Toast.LENGTH_SHORT).show();
         }catch(ScannerUnavailableException e){
             e.printStackTrace();
-            Toast.makeText(ToastyPlugin.this, "Scanner unavailable", Toast.LENGTH_SHORT).show();
         }       
      }
  });
@@ -125,7 +128,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
 
        @Override
      public void onBarcodeEvent(final BarcodeReadEvent event) {
-         runOnUiThread(new Runnable() {
+         cordova.getActivity().runOnUiThread(new Runnable() {
               @Override
              public void run() {
                  String barcodeData = event.getBarcodeData();
@@ -138,8 +141,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
                  Intent resultIntent = new Intent();
                 // TODO Add extras or a data URI to this intent as appropriate.
                 resultIntent.putExtra("barcodeData", barcodeData); 
-                setResult(Activity.RESULT_OK, resultIntent);
-                finish();
              }
          });
      }
