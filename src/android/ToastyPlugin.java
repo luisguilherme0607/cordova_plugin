@@ -22,6 +22,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
   
    private AidcManager manager;
    private BarcodeReader reader;
+   private CallbackContext callbackContext;
   
   @Override
   public boolean execute(String action, JSONArray args,
@@ -46,8 +47,9 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
         // Display toast
         toast.show();
         // Send a positive result to the callbackContext
-        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-        callbackContext.sendPluginResult(pluginResult);
+        this.callbackContext = callbackContext;
+       // PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+        //callbackContext.sendPluginResult(pluginResult);
       
        AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
 
@@ -140,6 +142,9 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
                 
                  Toast.makeText(cordova.getActivity(), barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
+
+                 PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, barcodeData);
+                 callbackContext.sendPluginResult(pluginResult);
                  // update UI to reflect the data
              }
          });
