@@ -86,7 +86,7 @@ public class Honeywell extends CordovaPlugin implements BarcodeReader.BarcodeLis
           properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
           reader.setProperties(properties);
 
-          reader.addBarcodeListener(ToastyPlugin.this);
+          reader.addBarcodeListener(Honeywell.this);
 
          
           try{
