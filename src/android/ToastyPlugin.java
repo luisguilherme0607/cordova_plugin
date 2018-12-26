@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import android.content.Intent;
 import android.content.Context;
 
 public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.BarcodeListener {
@@ -23,6 +22,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
    private AidcManager manager;
    private BarcodeReader reader;
    private CallbackContext callbackContext;
+   private boolean light;
   
   @Override
   public boolean execute(String action, JSONArray args,
@@ -37,44 +37,43 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             this.stopScan(context , callbackContext);
             return true;
         }
-
         return false;
     }
 
   private void scan(Context context, CallbackContext callbackContext){
 
-        Toast toast = Toast.makeText(cordova.getActivity(), "here", Toast.LENGTH_SHORT);
-        // Display toast
-        toast.show();
-        // Send a positive result to the callbackContext
         this.callbackContext = callbackContext;
-       // PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-        //callbackContext.sendPluginResult(pluginResult);
+        String light_option = "";
+
+        try {
+          JSONObject options = args.getJSONObject(0);
+          light_option = options.getString("message");
+
+        } catch (JSONException e) {
+            callbackContext.error("Error encountered: " + e.getMessage());
+          return false;
+        }
+
+        this.light = light_option.equals("true") ? true : false;
       
-       AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
+        AidcManager.create(this.cordova.getActivity().getApplicationContext() , new AidcManager.CreatedCallback() {
 
-      @Override
-     public void onCreated(AidcManager aidcManager) {
-         manager = aidcManager;
-         // use the manager to create a BarcodeReader with a session
-         // associated with the internal imager.
-         reader = manager.createBarcodeReader();
+           @Override
+           public void onCreated(AidcManager aidcManager) {
+           manager = aidcManager;
+           reader = manager.createBarcodeReader();
 
-         try {
-             // apply settings
-             reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
-             reader.setProperty(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+           try {
+               reader.setProperty(BarcodeReader.PROPERTY_CODE_39_ENABLED, false);
+               reader.setProperty(BarcodeReader.PROPERTY_DATAMATRIX_ENABLED, true);
+               reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE, BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
 
-             // set the trigger mode to automatic control
-             reader.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
-             
-                 BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
-     } catch (UnsupportedPropertyException e) {
-           e.printStackTrace();
-         }
+           } catch (UnsupportedPropertyException e) {
+               e.printStackTrace();
+           }
 
           Map<String, Object> properties = new HashMap<String, Object>();
-          // Set Symbologies On/Off
+
           properties.put(BarcodeReader.PROPERTY_CODE_128_ENABLED, true);
           properties.put(BarcodeReader.PROPERTY_GS1_128_ENABLED, true);
           properties.put(BarcodeReader.PROPERTY_QR_CODE_ENABLED, true);
@@ -86,86 +85,79 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
           properties.put(BarcodeReader.PROPERTY_CODABAR_ENABLED, false);
           properties.put(BarcodeReader.PROPERTY_INTERLEAVED_25_ENABLED, false);
           properties.put(BarcodeReader.PROPERTY_PDF_417_ENABLED, false);
-          // Set Max Code 39 barcode length
           properties.put(BarcodeReader.PROPERTY_CODE_39_MAXIMUM_LENGTH, 10);
-          // Turn on center decoding
           properties.put(BarcodeReader.PROPERTY_CENTER_DECODE, true);
-          // Enable bad read response
           properties.put(BarcodeReader.PROPERTY_NOTIFICATION_BAD_READ_ENABLED, true);
-          // Apply the settings
           reader.setProperties(properties);
 
-         // register bar code event listener
-         reader.addBarcodeListener(ToastyPlugin.this);
+          reader.addBarcodeListener(ToastyPlugin.this);
 
          
-         try{
+          try{
              
              reader.claim();
-            }catch(ScannerUnavailableException e){
-               Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
-                     Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+          }catch(ScannerUnavailableException e){
 
+             Toast.makeText(cordova.getActivity(), "Scanner unnavailable", Toast.LENGTH_SHORT).show();
+             e.printStackTrace();
             }
         try{
             
-            reader.light(true);
+            reader.light(this.light);
             reader.aim(true);
             reader.decode(true);
 
         }catch(ScannerNotClaimedException e){
-            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
-                     Toast.LENGTH_SHORT).show();
+            Toast.makeText(cordova.getActivity(), "Scanner not claimed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }catch(ScannerUnavailableException e){
-            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
-                     Toast.LENGTH_SHORT).show();
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }       
      }
- });
+  });
   }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
        @Override
-     public void onBarcodeEvent(final BarcodeReadEvent event) {
+       public void onBarcodeEvent(final BarcodeReadEvent event) {
          cordova.getActivity().runOnUiThread(new Runnable() {
               @Override
-             public void run() {
+              public void run() {
                  String barcodeData = event.getBarcodeData();
                  String timestamp = event.getTimestamp();
                 
                  Toast.makeText(cordova.getActivity(), barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
 
-                 PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, barcodeData);
-                 callbackContext.sendPluginResult(pluginResult);
-                 // update UI to reflect the data
+                 try {
+
+                     JSONObject data = new JSONObject();
+                     parameter.put("barcode", barcodeData);
+                     parameter.put("timestamp", timestamp);
+
+                     PluginResult result = new PluginResult(PluginResult.Status.OK, data);
+                     result.setKeepCallback(true);
+                     callbackContext.sendPluginResult(result);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
              }
          });
      }
 
        @Override
-     public void onFailureEvent(final BarcodeFailureEvent event) {
+       public void onFailureEvent(final BarcodeFailureEvent event) {
          cordova.getActivity().runOnUiThread(new Runnable() {
-              @Override
-             public void run() {
-                 Toast.makeText(cordova.getActivity(), "Barcode read failed",
-                     Toast.LENGTH_SHORT).show();
-             }
-         });
+               @Override
+               public void run() {
+                 Toast.makeText(cordova.getActivity(), "Barcode read failed", Toast.LENGTH_SHORT).show();
+              }
+          });
      }
 
 
      private void stopScan(Context context, CallbackContext callbackContext){
-
-       Toast toast = Toast.makeText(cordova.getActivity(), "Stopping scanner", Toast.LENGTH_SHORT);
-       toast.show();
 
           try{
             
@@ -174,30 +166,22 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
             reader.decode(false);
 
         }catch(ScannerNotClaimedException e){
-            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
-                     Toast.LENGTH_SHORT).show();
+            Toast.makeText(cordova.getActivity(), "Scanner not claimed exception", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }catch(ScannerUnavailableException e){
-            Toast.makeText(cordova.getActivity(), "Scanner unnavailable",
-                     Toast.LENGTH_SHORT).show();
+            Toast.makeText(cordova.getActivity(), "Scanner unnavailable", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }       
          if (reader != null) {
-             // unregister barcode event listener
              reader.removeBarcodeListener(this);
-
-             // close BarcodeReader to clean up resources.
-             // once closed, the object can no longer be used.
              reader.close();
          }
          if (manager != null) {
-             // close AidcManager to disconnect from the scanner service.
-             // once closed, the object can no longer be used.
              manager.close();
          }
 
-        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
-        callbackContext.sendPluginResult(pluginResult);
+         PluginResult pluginResult = new PluginResult(PluginResult.Status.OK);
+         callbackContext.sendPluginResult(pluginResult);
      }
 }
 
