@@ -31,8 +31,9 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
         if(action.equals("scan")) {
             this.scan(context, callbackContext);
             return true;
-        }else if(action.equals("stopScan")){
-            this.stopScanning(context , callbackContext);
+        } 
+        if(action.equals("stopScan")){
+            this.stopScan(context , callbackContext);
             return true;
         }
 
@@ -140,10 +141,6 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
                  Toast.makeText(cordova.getActivity(), barcodeData + " " + timestamp,
                      Toast.LENGTH_SHORT).show();
                  // update UI to reflect the data
-
-                 Intent resultIntent = new Intent();
-                // TODO Add extras or a data URI to this intent as appropriate.
-                resultIntent.putExtra("barcodeData", barcodeData); 
              }
          });
      }
@@ -160,7 +157,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
      }
 
 
-     public void stopScanning(Context context, CallbackContext callbackContext){
+     private void stopScan(Context context, CallbackContext callbackContext){
 
        Toast toast = Toast.makeText(cordova.getActivity(), "Stopping scanner", Toast.LENGTH_SHORT);
        toast.show();
