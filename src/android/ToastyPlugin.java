@@ -31,7 +31,7 @@ public class ToastyPlugin extends CordovaPlugin implements BarcodeReader.Barcode
         if(action.equals("scan")) {
             this.scan(context, callbackContext);
             return true;
-        }else if(actions.equals("stopScan")){
+        }else if(action.equals("stopScan")){
             stopScanning();
         }
 
