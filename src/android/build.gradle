@@ -6,7 +6,7 @@ repositories{
 }
 
 dependencies {
-  compile(name:'DataCollection', ext:'aar')
+  implementation(name:'DataCollection', ext:'aar')
 }
 
 android {
